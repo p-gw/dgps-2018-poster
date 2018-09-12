@@ -4,9 +4,12 @@ datenaufbereitung <- function(data) {
     setnames(data, "Map", "map")
     data[, c("lat", "long") := tstrsplit(map, ";")]
     data[, c("lat", "long") := .(as.numeric(lat), as.numeric(long))]
-    loc <- c(50.127, 8.667)
+    loc <- c(8.667, 50.127)
+    print(data)
     for (i in 1:nrow(data)) {
-      set(data, i, "dist", distHaversine(data[i, c(lat, long),], loc)/1000)
+      if (data[i, !is.na(lat)]) {
+        set(data, i, "dist", distHaversine(data[i, c(long, lat),], loc)/1000)
+      }
     }
     data[, "label" := paste0("Distanz: ", round(dist, 0), "km")]
   } else {
