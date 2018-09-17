@@ -1,4 +1,4 @@
-ts_datenaufbereitung <- function(data, startdate = as.POSIXct("2018-09-11 00:00:00", format = "%Y-%m-%d %H:%M:%S")) {
+ts_datenaufbereitung <- function(data, startdate = as.POSIXct("2018-09-17 10:00:00", format = "%Y-%m-%d %H:%M:%S")) {
   if (!is.null(data)) {
     data <- as.data.table(data)
     data[, "datestamp" := as.POSIXct(datestamp, format = "%Y-%m-%d %H:%M:%S")]
