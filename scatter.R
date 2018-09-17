@@ -6,11 +6,17 @@ observeEvent(input$grouping_enable, {
 output$scatter_plot <- renderPlot({
   req(RV$data)
   req(RV$plot_base_size)
+
+  max_x <- RV$data[, max(dist)]
+  max_y <- RV$data[, max(SozialesUmfeld)]
+
   p <- ggplot(RV$data[!is.na(dist) & !is.na(SozialesUmfeld) & !is.na(Gesellschaftsabend)], aes(x = dist, y = SozialesUmfeld)) +
     labs(
       "x" = "Distanz des Herkunftsortes von Frankfurt",
       "y" = "Anzahl bekannter Personen"
     ) +
+    scale_x_continuous(limits = c(0, max_x)) +
+    scale_y_continous(limits = c(0, max_y)) +
     theme_minimal(base_size = RV$plot_base_size)
 
   if (RV$grouping_enable) {
