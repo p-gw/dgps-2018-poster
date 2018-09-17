@@ -16,7 +16,7 @@ output$scatter_plot <- renderPlot({
       "y" = "Anzahl bekannter Personen"
     ) +
     scale_x_continuous(limits = c(0, max_x)) +
-    scale_y_continous(limits = c(0, max_y)) +
+    scale_y_continuous(limits = c(0, max_y)) +
     theme_minimal(base_size = RV$plot_base_size)
 
   if (RV$grouping_enable) {
